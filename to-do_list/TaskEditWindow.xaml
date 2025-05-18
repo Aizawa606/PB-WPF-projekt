@@ -1,0 +1,43 @@
+﻿<Window x:Class="WPF_Projekt.TaskEditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_Projekt"
+        mc:Ignorable="d"
+        Title="Dodaj/Edytuj zadanie" Height="500" Width="400"
+        WindowStartupLocation="CenterOwner">
+    <StackPanel Margin="15">
+        <Label Content="Nazwa zadania:"/>
+        <TextBox x:Name="TaskNameTextBox" Margin="0 0 0 10"/>
+
+        <Label Content="Opis (opcjonalny):"/>
+        <TextBox x:Name="DescriptionTextBox" Height="80" AcceptsReturn="True" Margin="0 0 0 10"/>
+
+        <Label Content="Kategoria:"/>
+        <ComboBox x:Name="CategoryComboBox" Margin="0 0 0 10">
+            <ComboBoxItem Content="Nowa kategoria..." IsSelected="True"/>
+        </ComboBox>
+
+        <Label Content="Priorytet:"/>
+        <ComboBox x:Name="PriorityComboBox" Margin="0 0 0 10">
+            <ComboBoxItem Content="Niski"/>
+            <ComboBoxItem Content="Średni"/>
+            <ComboBoxItem Content="Wysoki"/>
+        </ComboBox>
+
+        <Label Content="Termin:"/>
+        <DatePicker x:Name="DeadlineDatePicker" Margin="0 0 0 10"/>
+
+        <Label Content="Podzadania:"/>
+        <StackPanel x:Name="SubtasksPanel" Margin="0 0 0 10">
+            <!-- Podzadania będą dodawane dynamicznie -->
+        </StackPanel>
+        <Button x:Name="AddSubtaskBtn" Content="+ Dodaj podzadanie" Margin="0 0 0 20"/>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="CancelButton" Content="Anuluj" Width="80" Margin="0 0 10 0" IsCancel="True"/>
+            <Button x:Name="SaveButton" Content="Zapisz" Width="80" IsDefault="True"/>
+        </StackPanel>
+    </StackPanel>
+</Window>
