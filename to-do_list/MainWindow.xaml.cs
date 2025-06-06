@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using to_do_list;
+using System.Diagnostics;
 
 namespace WPF_Projekt
 {
@@ -22,7 +23,7 @@ namespace WPF_Projekt
     public partial class MainWindow : Window
     {
         public ObservableCollection<TaskItem> Tasks { get; set; } = new();
-        
+        private bool IsSortDescending = false;
 
         public MainWindow()
         {
@@ -39,6 +40,12 @@ namespace WPF_Projekt
 
             CategoriesList.ItemsSource = AppData.Categories;
             AddCategoryBtn.Click += AddCategoryBtn_Click;
+
+
+            SortComboBox.SelectionChanged += SortComboBox_SelectionChanged;
+            SortDirectionBtn.Click += SortDirectionBtn_Click;
+
+            SortTasks();
         }
 
         private void AddSubtaskBtn_Click(object sender, RoutedEventArgs e)
@@ -231,6 +238,75 @@ namespace WPF_Projekt
                 }
 
                 AppData.Categories.Add(new Category { Name = newCategory });
+            }
+        }
+
+        private void SortComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SortTasks();
+        }
+        private int GetPriorityValue(string priority)
+        {
+            return priority switch
+            {
+                "Wysoki" => 3,
+                "Średni" => 2,
+                "Niski" => 1,
+                _ => 0
+            };
+        }
+
+        private void SortDirectionBtn_Click(object sender, RoutedEventArgs e)
+        {
+            IsSortDescending = !IsSortDescending;
+
+            SortDirectionBtn.Content = IsSortDescending ? "▼" : "▲";
+
+            //Debug.WriteLine("Sort direction changed: " + (IsSortDescending ? "DESC" : "ASC"));
+            Debug.WriteLine("Clicked");
+
+            SortTasks();
+        }
+
+        private void SortTasks()
+        {
+            var selectedItem = (SortComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
+
+            if (string.IsNullOrEmpty(selectedItem))
+                return;
+
+            List<TaskItem> sortedTasks = Tasks.ToList();
+
+            switch (selectedItem)
+            {
+                case "Sortuj po dacie":
+                    sortedTasks = IsSortDescending
+                        ? sortedTasks.OrderByDescending(t => t.Deadline ?? DateTime.MinValue).ToList()
+                        : sortedTasks.OrderBy(t => t.Deadline ?? DateTime.MaxValue).ToList();
+                    break;
+
+                case "Sortuj po priorytecie":
+                    sortedTasks = IsSortDescending
+                        ? sortedTasks.OrderByDescending(t => GetPriorityValue(t.Priority)).ToList()
+                        : sortedTasks.OrderBy(t => GetPriorityValue(t.Priority)).ToList();
+                    break;
+
+                case "Sortuj po kategorii":
+                    sortedTasks = IsSortDescending
+                        ? sortedTasks.OrderByDescending(t => t.Category).ToList()
+                        : sortedTasks.OrderBy(t => t.Category).ToList();
+                    break;
+                case "Sortuj po nazwie":
+                    sortedTasks = IsSortDescending 
+                        ? sortedTasks.OrderByDescending(t => t.Title).ToList() 
+                        : sortedTasks.OrderBy(t => t.Title).ToList();
+                    break;
+            }
+
+            Tasks.Clear();
+            foreach (var task in sortedTasks)
+            {
+                Tasks.Add(task);
             }
         }
     }
