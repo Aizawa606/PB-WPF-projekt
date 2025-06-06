@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using to_do_list;
 
 namespace WPF_Projekt
 {
@@ -26,6 +27,16 @@ namespace WPF_Projekt
             InitializeComponent();
             SaveButton.Click += SaveButton_Click;
             AddSubtaskBtn.Click += AddSubtaskBtn_Click;
+
+            // Załaduj kategorie do ComboBox
+            foreach (var category in AppData.Categories)
+            {
+                CategoryComboBox.Items.Add(new ComboBoxItem { Content = category.Name });
+            }
+
+            // Domyślny wybór
+            if (CategoryComboBox.Items.Count > 0)
+                CategoryComboBox.SelectedIndex = 0;
         }
 
         private void AddSubtaskBtn_Click(object sender, RoutedEventArgs e)

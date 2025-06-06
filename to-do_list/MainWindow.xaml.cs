@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using to_do_list;
 
 namespace WPF_Projekt
 {
@@ -21,6 +22,7 @@ namespace WPF_Projekt
     public partial class MainWindow : Window
     {
         public ObservableCollection<TaskItem> Tasks { get; set; } = new();
+        
 
         public MainWindow()
         {
@@ -35,6 +37,8 @@ namespace WPF_Projekt
             MarkAsDoneBtn.Click += MarkAsDoneBtn_Click;
             AddSubtaskBtn.Click += AddSubtaskBtn_Click;
 
+            CategoriesList.ItemsSource = AppData.Categories;
+            AddCategoryBtn.Click += AddCategoryBtn_Click;
         }
 
         private void AddSubtaskBtn_Click(object sender, RoutedEventArgs e)
@@ -211,6 +215,22 @@ namespace WPF_Projekt
             else
             {
                 MessageBox.Show("Wybierz zadanie do usunięcia.", "Informacja", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        private void AddCategoryBtn_Click(object sender, RoutedEventArgs e)
+        {
+            string newCategory = Microsoft.VisualBasic.Interaction.InputBox("Wpisz nazwę nowej kategorii:", "Dodaj kategorię", "");
+
+            if (!string.IsNullOrWhiteSpace(newCategory))
+            {
+                if (AppData.Categories.Any(c => c.Name.Equals(newCategory, StringComparison.OrdinalIgnoreCase)))
+                {
+                    MessageBox.Show("Taka kategoria już istnieje.", "Informacja", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
+                }
+
+                AppData.Categories.Add(new Category { Name = newCategory });
             }
         }
     }
