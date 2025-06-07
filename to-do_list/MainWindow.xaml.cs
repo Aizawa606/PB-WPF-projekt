@@ -22,14 +22,25 @@ namespace WPF_Projekt
     /// </summary>
     public partial class MainWindow : Window
     {
-        public ObservableCollection<TaskItem> Tasks { get; set; } = new();
+
+        public ObservableCollection<TaskItem> Tasks { get; set; }
+
         private bool IsSortDescending = false;
 
         public MainWindow()
         {
             InitializeComponent();
 
+            // Wczytaj dane z pliku
+            AppData.Categories.Clear();
+            foreach (var cat in Storage.LoadCategories())
+            {
+                AppData.Categories.Add(cat);
+            }
+
+            Tasks = Storage.LoadTasks() ?? new ObservableCollection<TaskItem>();
             TasksList.ItemsSource = Tasks;
+
 
             AddTaskBtn.Click += AddTaskBtn_Click;
             EditTaskBtn.Click += EditTaskBtn_Click;
@@ -140,7 +151,9 @@ namespace WPF_Projekt
             if (window.ShowDialog() == true && window.CreatedTask != null)
             {
                 Tasks.Add(window.CreatedTask);
+                Storage.SaveTasks(Tasks);
             }
+
         }
 
         private void EditTaskBtn_Click(object sender, RoutedEventArgs e)
@@ -199,6 +212,9 @@ namespace WPF_Projekt
 
                     // Odśwież listę (ObservableCollection powinno odświeżać UI, ale jeśli nie, możesz użyć ToList + Clear + Add)
                     TasksList.Items.Refresh();
+                    // Zapis do pliku
+                    Storage.SaveTasks(Tasks);
+
                 }
             }
             else
@@ -217,6 +233,9 @@ namespace WPF_Projekt
                 if (result == MessageBoxResult.Yes)
                 {
                     Tasks.Remove(selectedTask);
+                    // zapis do pliku
+                    Storage.SaveTasks(Tasks);
+
                 }
             }
             else
@@ -240,6 +259,8 @@ namespace WPF_Projekt
                 if (!AppData.Categories.Any(c => c.Name == newCategory))
                 {
                     AppData.Categories.Add(new Category { Name = newCategory });
+                    // zapis do pliku
+                    Storage.SaveCategories(AppData.Categories);
                 }
                 else
                 {
@@ -277,6 +298,9 @@ namespace WPF_Projekt
 
         private void SortTasks()
         {
+            if (Tasks == null || Tasks.Count == 0)
+                return; // nie ma co sortować
+
             var selectedItem = (SortComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
 
             if (string.IsNullOrEmpty(selectedItem))
@@ -316,6 +340,14 @@ namespace WPF_Projekt
                 Tasks.Add(task);
             }
         }
+
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            base.OnClosing(e);
+            Storage.SaveTasks(Tasks);
+            Storage.SaveCategories(AppData.Categories);
+        }
+
 
 
     }
