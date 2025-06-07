@@ -227,17 +227,24 @@ namespace WPF_Projekt
 
         private void AddCategoryBtn_Click(object sender, RoutedEventArgs e)
         {
-            string newCategory = Microsoft.VisualBasic.Interaction.InputBox("Wpisz nazwę nowej kategorii:", "Dodaj kategorię", "");
-
-            if (!string.IsNullOrWhiteSpace(newCategory))
+            var window = new AddCategoryWindow()
             {
-                if (AppData.Categories.Any(c => c.Name.Equals(newCategory, StringComparison.OrdinalIgnoreCase)))
-                {
-                    MessageBox.Show("Taka kategoria już istnieje.", "Informacja", MessageBoxButton.OK, MessageBoxImage.Information);
-                    return;
-                }
+                Owner = this, 
+                WindowStartupLocation = WindowStartupLocation.CenterOwner
+            };
 
-                AppData.Categories.Add(new Category { Name = newCategory });
+            if (window.ShowDialog() == true)
+            {
+                string newCategory = window.CategoryName;
+
+                if (!AppData.Categories.Any(c => c.Name == newCategory))
+                {
+                    AppData.Categories.Add(new Category { Name = newCategory });
+                }
+                else
+                {
+                    MessageBox.Show("Kategoria o takiej nazwie już istnieje.", "Informacja", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
             }
         }
 
@@ -309,6 +316,8 @@ namespace WPF_Projekt
                 Tasks.Add(task);
             }
         }
+
+
     }
 
 }
