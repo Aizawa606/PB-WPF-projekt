@@ -327,9 +327,10 @@ namespace WPF_Projekt
 
                 case "Sortuj po kategorii":
                     filtered = IsSortDescending
-                        ? filtered.OrderByDescending(t => t.Category)
-                        : filtered.OrderBy(t => t.Category);
+                        ? filtered.OrderByDescending(t => t.Category?.Name ?? "")
+                        : filtered.OrderBy(t => t.Category?.Name ?? "");
                     break;
+
 
                 case "Sortuj po nazwie":
                     filtered = IsSortDescending
