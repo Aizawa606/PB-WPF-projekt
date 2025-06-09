@@ -31,8 +31,10 @@ namespace WPF_Projekt
             // Załaduj kategorie do ComboBox
             foreach (var category in AppData.Categories)
             {
-                CategoryComboBox.Items.Add(new ComboBoxItem { Content = category.Name });
+                CategoryComboBox.Items.Add(category); 
             }
+            CategoryComboBox.DisplayMemberPath = "Name"; 
+
 
             // Domyślny wybór
             if (CategoryComboBox.Items.Count > 0)
@@ -65,16 +67,18 @@ namespace WPF_Projekt
             string priority = selectedPriorityItem?.Content.ToString() ?? "Niski";
 
             // Kategoria
-            string category;
-            var selectedCategory = CategoryComboBox.SelectedItem as ComboBoxItem;
-            if (selectedCategory != null && selectedCategory.Content.ToString() == "Nowa kategoria...")
+            Category category;
+            var selectedCategory = CategoryComboBox.SelectedItem as Category;
+            if (selectedCategory != null)
             {
-                category = "Nowa"; // Możesz rozszerzyć o pobieranie z innego pola
+                category = selectedCategory;
             }
             else
             {
-                category = selectedCategory?.Content.ToString() ?? "Ogólna";
+                category = new Category { Name = "Ogólna" };
             }
+
+
 
             CreatedTask = new TaskItem
             {

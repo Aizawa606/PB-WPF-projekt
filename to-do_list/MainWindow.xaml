@@ -53,7 +53,14 @@
                     <GridView>
                         <GridViewColumn Header="Status" Width="50" DisplayMemberBinding="{Binding StatusSymbol}"/>
                         <GridViewColumn Header="Nazwa" Width="200" DisplayMemberBinding="{Binding Title}"/>
-                        <GridViewColumn Header="Kategoria" Width="120" DisplayMemberBinding="{Binding Category}"/>
+                        <GridViewColumn Header="Kategoria" Width="120">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Category.Name}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
                         <GridViewColumn Header="Priorytet" Width="80" DisplayMemberBinding="{Binding Priority}"/>
                         <GridViewColumn Header="Termin" Width="100" DisplayMemberBinding="{Binding Deadline}"/>
                     </GridView>
