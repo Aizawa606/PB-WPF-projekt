@@ -1,0 +1,16 @@
+﻿<Window x:Class="to_do_list.EditCategoryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:to_do_list"
+        mc:Ignorable="d"
+        Title="Edytuj kategorię" Height="150" Width="300">
+    <Grid Margin="10">
+        <StackPanel>
+            <TextBlock Text="Nowa nazwa kategorii:" Margin="0,0,0,5"/>
+            <TextBox x:Name="CategoryNameTextBox" Margin="0,0,0,10"/>
+            <Button Content="Zapisz" Click="Save_Click" Width="80" HorizontalAlignment="Right"/>
+        </StackPanel>
+    </Grid>
+</Window>
