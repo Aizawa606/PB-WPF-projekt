@@ -113,6 +113,9 @@ namespace WPF_Projekt
 
                 // Aktualizuj panel szczegółów
                 TasksList_SelectionChanged(null, null);
+
+                // Odswiezenie do filtrowania
+                FilterAndSortTasks();
             }
             else
             {
@@ -342,8 +345,21 @@ namespace WPF_Projekt
             if (string.IsNullOrEmpty(selectedItem)) return;
 
             string searchText = SearchTextBox.Text?.Trim().ToLower() ?? "";
+            string selectedStatus = (StatusFilterComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
 
             IEnumerable<TaskItem> filtered = AllTasks;
+
+            // Filtrowanie po statusie
+            switch (selectedStatus)
+            {
+                case "Zakończone":
+                    filtered = filtered.Where(t => t.Completed);
+                    break;
+                case "Niezakończone":
+                    filtered = filtered.Where(t => !t.Completed);
+                    break;
+                    // "Wszystkie" — bez filtrowania
+            }
 
             // Wyszukiwanie
             if (!string.IsNullOrWhiteSpace(searchText))
@@ -399,6 +415,10 @@ namespace WPF_Projekt
             FilterAndSortTasks();
         }
 
+        private void StatusFilterComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            FilterAndSortTasks();
+        }
 
 
     }

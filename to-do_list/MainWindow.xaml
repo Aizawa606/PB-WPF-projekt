@@ -41,6 +41,11 @@
                     <ComboBoxItem Content="Sortuj po nazwie"/>
                 </ComboBox>
                 <Button x:Name="SortDirectionBtn" Content="▲" Width="30" Height="25" ToolTip="Zmień kierunek sortowania"/>
+                <ComboBox x:Name="StatusFilterComboBox" Width="150" Margin="5" SelectionChanged="StatusFilterComboBox_SelectionChanged">
+                    <ComboBoxItem Content="Wszystkie" IsSelected="True"/>
+                    <ComboBoxItem Content="Zakończone"/>
+                    <ComboBoxItem Content="Niezakończone"/>
+                </ComboBox>
             </StackPanel>
 
             <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 10 0 0">
