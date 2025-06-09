@@ -27,6 +27,8 @@ namespace WPF_Projekt
 
         private bool IsSortDescending = false;
 
+        private List<TaskItem> AllTasks = new();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -41,6 +43,7 @@ namespace WPF_Projekt
             Tasks = Storage.LoadTasks() ?? new ObservableCollection<TaskItem>();
             TasksList.ItemsSource = Tasks;
 
+            AllTasks = Tasks.ToList();
 
             AddTaskBtn.Click += AddTaskBtn_Click;
             EditTaskBtn.Click += EditTaskBtn_Click;
@@ -52,11 +55,12 @@ namespace WPF_Projekt
             CategoriesList.ItemsSource = AppData.Categories;
             AddCategoryBtn.Click += AddCategoryBtn_Click;
 
+            SearchTextBox.TextChanged += SearchTextBox_TextChanged;
 
             SortComboBox.SelectionChanged += SortComboBox_SelectionChanged;
             SortDirectionBtn.Click += SortDirectionBtn_Click;
 
-            SortTasks();
+            FilterAndSortTasks();
         }
 
         private void AddSubtaskBtn_Click(object sender, RoutedEventArgs e)
@@ -150,8 +154,9 @@ namespace WPF_Projekt
             var window = new TaskEditWindow();
             if (window.ShowDialog() == true && window.CreatedTask != null)
             {
+                AllTasks.Add(window.CreatedTask);
                 Tasks.Add(window.CreatedTask);
-                Storage.SaveTasks(Tasks);
+                FilterAndSortTasks(); // sortowanie po dodaniu
             }
 
         }
@@ -278,7 +283,7 @@ namespace WPF_Projekt
 
         private void SortComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            SortTasks();
+            FilterAndSortTasks();
         }
         private int GetPriorityValue(string priority)
         {
@@ -300,49 +305,56 @@ namespace WPF_Projekt
             //Debug.WriteLine("Sort direction changed: " + (IsSortDescending ? "DESC" : "ASC"));
             Debug.WriteLine("Clicked");
 
-            SortTasks();
+            FilterAndSortTasks();
         }
 
-        private void SortTasks()
+        private void FilterAndSortTasks()
         {
-            if (Tasks == null || Tasks.Count == 0)
-                return; // nie ma co sortować
+            if (Tasks == null || AllTasks == null) return;
 
             var selectedItem = (SortComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
+            if (string.IsNullOrEmpty(selectedItem)) return;
 
-            if (string.IsNullOrEmpty(selectedItem))
-                return;
+            string searchText = SearchTextBox.Text?.Trim().ToLower() ?? "";
 
-            List<TaskItem> sortedTasks = Tasks.ToList();
+            IEnumerable<TaskItem> filtered = AllTasks;
 
+            // Wyszukiwanie
+            if (!string.IsNullOrWhiteSpace(searchText))
+            {
+                filtered = filtered.Where(t => t.Title.ToLower().Contains(searchText));
+            }
+
+            // Sortowanie
             switch (selectedItem)
             {
                 case "Sortuj po dacie":
-                    sortedTasks = IsSortDescending
-                        ? sortedTasks.OrderByDescending(t => t.Deadline ?? DateTime.MinValue).ToList()
-                        : sortedTasks.OrderBy(t => t.Deadline ?? DateTime.MaxValue).ToList();
+                    filtered = IsSortDescending
+                        ? filtered.OrderByDescending(t => t.Deadline ?? DateTime.MinValue)
+                        : filtered.OrderBy(t => t.Deadline ?? DateTime.MaxValue);
                     break;
 
                 case "Sortuj po priorytecie":
-                    sortedTasks = IsSortDescending
-                        ? sortedTasks.OrderByDescending(t => GetPriorityValue(t.Priority)).ToList()
-                        : sortedTasks.OrderBy(t => GetPriorityValue(t.Priority)).ToList();
+                    filtered = IsSortDescending
+                        ? filtered.OrderByDescending(t => GetPriorityValue(t.Priority))
+                        : filtered.OrderBy(t => GetPriorityValue(t.Priority));
                     break;
 
                 case "Sortuj po kategorii":
-                    sortedTasks = IsSortDescending
-                        ? sortedTasks.OrderByDescending(t => t.Category).ToList()
-                        : sortedTasks.OrderBy(t => t.Category).ToList();
+                    filtered = IsSortDescending
+                        ? filtered.OrderByDescending(t => t.Category)
+                        : filtered.OrderBy(t => t.Category);
                     break;
+
                 case "Sortuj po nazwie":
-                    sortedTasks = IsSortDescending 
-                        ? sortedTasks.OrderByDescending(t => t.Title).ToList() 
-                        : sortedTasks.OrderBy(t => t.Title).ToList();
+                    filtered = IsSortDescending
+                        ? filtered.OrderByDescending(t => t.Title)
+                        : filtered.OrderBy(t => t.Title);
                     break;
             }
 
             Tasks.Clear();
-            foreach (var task in sortedTasks)
+            foreach (var task in filtered)
             {
                 Tasks.Add(task);
             }
@@ -353,6 +365,11 @@ namespace WPF_Projekt
             base.OnClosing(e);
             Storage.SaveTasks(Tasks);
             Storage.SaveCategories(AppData.Categories);
+        }
+
+        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            FilterAndSortTasks();
         }
 
 
