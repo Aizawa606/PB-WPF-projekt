@@ -269,6 +269,13 @@ namespace WPF_Projekt
             }
         }
 
+        private void BtnExportPdf_Click(object sender, RoutedEventArgs e)
+        {
+            // Załóżmy, że lista zadań to `List<TaskItem> taskList`
+            PDFExportService.ExportTasksToPdf(Tasks.ToList());
+        }
+
+
         private void SortComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SortTasks();

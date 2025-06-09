@@ -46,6 +46,7 @@
                 <Button x:Name="EditTaskBtn" Content="Edytuj" Margin="0 0 10 0" Padding="5" Width="80"/>
                 <Button x:Name="DeleteTaskBtn" Content="Usuń" Margin="0 0 10 0" Padding="5" Width="80"/>
                 <Button x:Name="MarkAsDoneBtn" Content="✔ Wykonane" Padding="5" Width="100"/>
+                <Button x:Name="ExportPdfBtn" Content="Eksportuj do PDF" Click="BtnExportPdf_Click" Margin="5"/>
             </StackPanel>
 
             <ListView x:Name="TasksList">
