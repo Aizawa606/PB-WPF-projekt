@@ -185,7 +185,7 @@ namespace WPF_Projekt
                 window.DeadlineDatePicker.SelectedDate = selectedTask.Deadline;
 
                 // Dodaj podzadania
-                window.SubtasksPanel.Children.Clear();
+                window.SubtasksListBox.Items.Clear();
                 foreach (var sub in selectedTask.Subtasks)
                 {
                     var tb = new TextBox
@@ -194,8 +194,10 @@ namespace WPF_Projekt
                         Margin = new Thickness(0, 5, 0, 0),
                         MinWidth = 200
                     };
-                    window.SubtasksPanel.Children.Add(tb);
+                    var item = new ListBoxItem { Content = tb };
+                    window.SubtasksListBox.Items.Add(item);
                 }
+
 
                 if (window.ShowDialog() == true && window.CreatedTask != null)
                 {
@@ -211,6 +213,8 @@ namespace WPF_Projekt
                     TasksList.Items.Refresh();
                     // Zapis do pliku
                     Storage.SaveTasks(Tasks);
+
+                    TasksList_SelectionChanged(null, null);
 
                 }
             }
@@ -265,6 +269,36 @@ namespace WPF_Projekt
                 }
             }
         }
+
+        private void DeleteSubtaskBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedSubtask = SubtasksList.SelectedItem as SubTask;
+
+            if (selectedSubtask == null)
+            {
+                MessageBox.Show("Proszę zaznaczyć podzadanie do usunięcia.", "Brak zaznaczenia", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+          
+            if (TasksList.SelectedItem is TaskItem selectedTask)
+            {
+                var result = MessageBox.Show($"Czy na pewno chcesz usunąć podzadanie \"{selectedSubtask.Title}\"?",
+                                             "Potwierdzenie usunięcia", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    selectedTask.Subtasks.Remove(selectedSubtask);
+                    SubtasksList.Items.Refresh();
+                    TasksList.Items.Refresh();
+                    Storage.SaveTasks(Tasks);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Proszę najpierw wybrać zadanie.", "Brak zaznaczonego zadania", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
 
         private void BtnExportPdf_Click(object sender, RoutedEventArgs e)
         {

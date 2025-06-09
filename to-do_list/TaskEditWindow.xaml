@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_Projekt"
         mc:Ignorable="d"
-        Title="Dodaj/Edytuj zadanie" Height="520" Width="400"
+        Title="Dodaj/Edytuj zadanie" Height="720" Width="400"
         WindowStartupLocation="CenterOwner">
     <StackPanel Margin="15">
         <Label Content="Nazwa zadania:"/>
@@ -30,10 +30,14 @@
         <DatePicker x:Name="DeadlineDatePicker" Margin="0 0 0 10"/>
 
         <Label Content="Podzadania:"/>
-        <StackPanel x:Name="SubtasksPanel" Margin="0 0 0 10">
-            <!-- Podzadania będą dodawane dynamicznie -->
+        <ListBox x:Name="SubtasksListBox" Height="80" SelectionMode="Single" Margin="0 0 0 10">
+            <!-- Elementy podzadań będą tu dodawane -->
+        </ListBox>
+        <StackPanel Orientation="Horizontal" Margin="0 0 0 20">
+            <Button x:Name="AddSubtaskBtn" Content="+ Dodaj podzadanie" Width="150"/>
+            <Button x:Name="DeleteSubtaskBtn" Content="− Usuń podzadanie" Width="150" Margin="10 0 0 0" />
         </StackPanel>
-        <Button x:Name="AddSubtaskBtn" Content="+ Dodaj podzadanie" Margin="0 0 0 20"/>
+
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <Button x:Name="CancelButton" Content="Anuluj" Width="80" Margin="0 0 10 0" IsCancel="True"/>
