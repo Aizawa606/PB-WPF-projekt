@@ -33,7 +33,7 @@
         <ListBox x:Name="SubtasksListBox" Height="80" SelectionMode="Single" Margin="0 0 0 10">
             <!-- Elementy podzadań będą tu dodawane -->
         </ListBox>
-        <StackPanel Orientation="Horizontal" Margin="0 0 0 20">
+        <StackPanel Orientation="Horizontal" Margin="0 0 0 20" HorizontalAlignment="Center">
             <Button x:Name="AddSubtaskBtn" Content="+ Dodaj podzadanie" Width="150"/>
             <Button x:Name="DeleteSubtaskBtn" Content="− Usuń podzadanie" Width="150" Margin="10 0 0 0" />
         </StackPanel>

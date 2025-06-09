@@ -53,27 +53,36 @@ namespace WPF_Projekt
         }
         private void AddSubtaskBtn_Click(object sender, RoutedEventArgs e)
         {
-            
-            var tb = new TextBox
+            var existingNames = SubtasksListBox.Items
+                .OfType<string>() 
+                .Select(name => name.ToString())
+                .ToList();
+
+            var inputWindow = new SubtaskInputWindow
             {
-                MinWidth = 200,
-                Margin = new Thickness(0, 2, 0, 2)
+                Owner = this,
+                ExistingSubtaskNames = existingNames
             };
-            var item = new ListBoxItem();
-            item.Content = tb;
-            SubtasksListBox.Items.Add(item);
+
+            if (inputWindow.ShowDialog() == true)
+            {
+                SubtasksListBox.Items.Add(inputWindow.SubtaskName);
+            }
         }
+
+
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             var subtasks = new List<SubTask>();
-            foreach (ListBoxItem item in SubtasksListBox.Items)
+            foreach (var item in SubtasksListBox.Items)
             {
-                if (item.Content is TextBox tb && !string.IsNullOrWhiteSpace(tb.Text))
+                if (item is string text && !string.IsNullOrWhiteSpace(text))
                 {
-                    subtasks.Add(new SubTask { Title = tb.Text, Completed = false });
+                    subtasks.Add(new SubTask { Title = text, Completed = false });
                 }
             }
+
 
             // Priorytet
             var selectedPriorityItem = PriorityComboBox.SelectedItem as ComboBoxItem;
