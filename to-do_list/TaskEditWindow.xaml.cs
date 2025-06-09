@@ -27,6 +27,7 @@ namespace WPF_Projekt
             InitializeComponent();
             SaveButton.Click += SaveButton_Click;
             AddSubtaskBtn.Click += AddSubtaskBtn_Click;
+            DeleteSubtaskBtn.Click += DeleteSubtaskBtn_Click;
 
             // Załaduj kategorie do ComboBox
             foreach (var category in AppData.Categories)
@@ -41,22 +42,34 @@ namespace WPF_Projekt
                 CategoryComboBox.SelectedIndex = 0;
         }
 
+        private void DeleteSubtaskBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (SubtasksListBox.SelectedItem == null)
+            {
+                MessageBox.Show("Proszę zaznaczyć podzadanie do usunięcia.", "Brak zaznaczenia", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            SubtasksListBox.Items.Remove(SubtasksListBox.SelectedItem);
+        }
         private void AddSubtaskBtn_Click(object sender, RoutedEventArgs e)
         {
+            
             var tb = new TextBox
             {
-                Margin = new Thickness(0, 5, 0, 0),
-                MinWidth = 200
+                MinWidth = 200,
+                Margin = new Thickness(0, 2, 0, 2)
             };
-            SubtasksPanel.Children.Add(tb);
+            var item = new ListBoxItem();
+            item.Content = tb;
+            SubtasksListBox.Items.Add(item);
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             var subtasks = new List<SubTask>();
-            foreach (var child in SubtasksPanel.Children)
+            foreach (ListBoxItem item in SubtasksListBox.Items)
             {
-                if (child is TextBox tb && !string.IsNullOrWhiteSpace(tb.Text))
+                if (item.Content is TextBox tb && !string.IsNullOrWhiteSpace(tb.Text))
                 {
                     subtasks.Add(new SubTask { Title = tb.Text, Completed = false });
                 }
