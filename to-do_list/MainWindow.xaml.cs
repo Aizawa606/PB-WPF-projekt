@@ -125,7 +125,7 @@ namespace WPF_Projekt
             if (TasksList.SelectedItem is TaskItem selectedTask)
             {
                 TaskTitle.Text = selectedTask.Title;
-                TaskCategory.Text = $"Kategoria: {selectedTask.Category}";
+                TaskCategory.Text = $"Kategoria: {selectedTask.Category?.Name}";
                 TaskPriority.Text = $"Priorytet: {selectedTask.Priority}";
 
                 TaskDeadline.Text = selectedTask.Deadline.HasValue
@@ -171,15 +171,7 @@ namespace WPF_Projekt
                 window.TaskNameTextBox.Text = selectedTask.Title;
                 window.DescriptionTextBox.Text = selectedTask.Description;
 
-                // Ustaw kategorię w ComboBox (zakładam, że masz metody na dodanie kategorii, tutaj prosty przykład)
-                foreach (ComboBoxItem item in window.CategoryComboBox.Items)
-                {
-                    if (item.Content.ToString() == selectedTask.Category)
-                    {
-                        window.CategoryComboBox.SelectedItem = item;
-                        break;
-                    }
-                }
+                window.CategoryComboBox.SelectedItem = AppData.Categories.FirstOrDefault(c => c.Name == selectedTask.Category.Name);
 
                 foreach (ComboBoxItem item in window.PriorityComboBox.Items)
                 {
@@ -342,9 +334,10 @@ namespace WPF_Projekt
 
                 case "Sortuj po kategorii":
                     filtered = IsSortDescending
-                        ? filtered.OrderByDescending(t => t.Category)
-                        : filtered.OrderBy(t => t.Category);
+                        ? filtered.OrderByDescending(t => t.Category?.Name ?? "")
+                        : filtered.OrderBy(t => t.Category?.Name ?? "");
                     break;
+
 
                 case "Sortuj po nazwie":
                     filtered = IsSortDescending

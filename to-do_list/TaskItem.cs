@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Controls;
+using to_do_list;
 
 namespace WPF_Projekt
 {
@@ -14,7 +15,7 @@ namespace WPF_Projekt
     {
         public string Title { get; set; }
         public string Description { get; set; }
-        public string Category { get; set; }
+        public Category Category { get; set; } 
         public string Priority { get; set; } // "Niski", "Średni", "Wysoki"
         public DateTime? Deadline { get; set; }
         public bool Completed { get; set; }
@@ -22,4 +23,5 @@ namespace WPF_Projekt
 
         public string StatusSymbol => Completed ? "✔" : "✖";
     }
+
 }
