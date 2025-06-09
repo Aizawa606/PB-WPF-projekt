@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_Projekt"
         mc:Ignorable="d"
-        Title="Task Manager" Height="700" Width="1100"
+        Title="Task Manager" Height="700" Width="1200"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -31,29 +31,56 @@
 
         <!-- Środkowy panel - lista zadań -->
         <DockPanel Grid.Column="1" Margin="10">
-            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0 0 0 10">
-                <Button x:Name="AddTaskBtn" Content="+ Dodaj zadanie" Margin="0 0 10 0" Padding="5"/>
-                <TextBox x:Name="SearchTextBox" Width="200" Margin="0 0 10 0" TextChanged="SearchTextBox_TextChanged"/>
-                <ComboBox x:Name="SortComboBox" Width="150" SelectedIndex="0" SelectionChanged="SortComboBox_SelectionChanged">
+            <Grid DockPanel.Dock="Top" Margin="0 0 0 10" Height="30">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <!-- AddTaskBtn -->
+                    <ColumnDefinition Width="10"/>
+                    <!-- spacing -->
+                    <ColumnDefinition Width="2*"/>
+                    <!-- SearchTextBox -->
+                    <ColumnDefinition Width="10"/>
+                    <!-- spacing -->
+                    <ColumnDefinition Width="1.5*"/>
+                    <!-- SortComboBox -->
+                    <ColumnDefinition Width="10"/>
+                    <!-- spacing -->
+                    <ColumnDefinition Width="Auto"/>
+                    <!-- SortDirectionBtn -->
+                    <ColumnDefinition Width="10"/>
+                    <!-- spacing -->
+                    <ColumnDefinition Width="1.5*"/>
+                    <!-- StatusFilterComboBox -->
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="AddTaskBtn" Content="+ Dodaj zadanie" Padding="5" VerticalAlignment="Center" Grid.Column="0"/>
+
+                <TextBox x:Name="SearchTextBox" Margin="0" VerticalAlignment="Center" Grid.Column="2" TextChanged="SearchTextBox_TextChanged"/>
+
+                <ComboBox x:Name="SortComboBox" VerticalAlignment="Center" Grid.Column="4" SelectedIndex="0" SelectionChanged="SortComboBox_SelectionChanged">
                     <ComboBoxItem Content="Sortuj po dacie"/>
                     <ComboBoxItem Content="Sortuj po priorytecie"/>
                     <ComboBoxItem Content="Sortuj po kategorii"/>
                     <ComboBoxItem Content="Sortuj po nazwie"/>
                 </ComboBox>
-                <Button x:Name="SortDirectionBtn" Content="▲" Width="30" Height="25" ToolTip="Zmień kierunek sortowania"/>
-                <ComboBox x:Name="StatusFilterComboBox" Width="150" Margin="5" SelectionChanged="StatusFilterComboBox_SelectionChanged">
+
+                <Button x:Name="SortDirectionBtn" Content="▲" Width="30" Height="25" VerticalAlignment="Center" ToolTip="Zmień kierunek sortowania" Grid.Column="6"/>
+
+                <ComboBox x:Name="StatusFilterComboBox" Margin="0" VerticalAlignment="Center" Grid.Column="8" SelectionChanged="StatusFilterComboBox_SelectionChanged">
                     <ComboBoxItem Content="Wszystkie" IsSelected="True"/>
                     <ComboBoxItem Content="Zakończone"/>
                     <ComboBoxItem Content="Niezakończone"/>
                 </ComboBox>
+            </Grid>
+
+            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 10 0 0" >
+                <Button x:Name="EditTaskBtn" Content="Edytuj" Margin="0 0 10 0" Padding="5" Width="100" Height="30"/>
+                <Button x:Name="DeleteTaskBtn" Content="Usuń" Margin="0 0 10 0" Padding="5" Width="100" Height="30"/>
+                <Button x:Name="MarkAsDoneBtn" Content="✔ Wykonane" Padding="5" Width="100" Height="30"/>
+                <Button x:Name="ExportPdfBtn" Content="Eksportuj do PDF" Click="BtnExportPdf_Click" Margin="5" Padding="5" Height="30"/>
             </StackPanel>
 
-            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 10 0 0">
-                <Button x:Name="EditTaskBtn" Content="Edytuj" Margin="0 0 10 0" Padding="5" Width="80"/>
-                <Button x:Name="DeleteTaskBtn" Content="Usuń" Margin="0 0 10 0" Padding="5" Width="80"/>
-                <Button x:Name="MarkAsDoneBtn" Content="✔ Wykonane" Padding="5" Width="100"/>
-                <Button x:Name="ExportPdfBtn" Content="Eksportuj do PDF" Click="BtnExportPdf_Click" Margin="5"/>
-            </StackPanel>
+
 
             <ListView x:Name="TasksList">
                 <ListView.View>
@@ -87,11 +114,19 @@
                     <TextBlock Text="Opis:" FontWeight="Bold" Margin="0 10 0 5"/>
                     <TextBlock x:Name="TaskDescription" TextWrapping="Wrap" Margin="0 0 0 15"/>
 
-                    <StackPanel Orientation="Horizontal" Margin="0 10 0 5">
-                        <TextBlock Text="Podzadania:" FontWeight="Bold"/>
-                        <Button x:Name="AddSubtaskBtn" Content="+" Margin="10 0 0 0" Padding="3 0"/>
-                        <Button x:Name="DeleteSubtaskBtn" Content="−" Margin="5 0 0 0" Padding="3 0" Width="25" Click="DeleteSubtaskBtn_Click"/>
+                    <StackPanel Orientation="Horizontal" Margin="0 10 0 5" VerticalAlignment="Center">
+                        <TextBlock Text="Podzadania:" FontWeight="Bold" VerticalAlignment="Center"/>
+                        <Grid Margin="10 0 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button x:Name="AddSubtaskBtn" Content="+" Padding="3 0" Width="25" Height="25" Grid.Column="0"/>
+                            <Button x:Name="DeleteSubtaskBtn" Content="−" Padding="3 0" Width="25" Height="25" Grid.Column="1" Margin="5 0 0 0" Click="DeleteSubtaskBtn_Click"/>
+                        </Grid>
                     </StackPanel>
+
 
                     <ListView x:Name="SubtasksList" Margin="0 0 0 10" SelectionMode="Single">
                         <ListView.ItemTemplate>
