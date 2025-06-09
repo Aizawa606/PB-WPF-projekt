@@ -60,6 +60,9 @@ namespace WPF_Projekt
             SortComboBox.SelectionChanged += SortComboBox_SelectionChanged;
             SortDirectionBtn.Click += SortDirectionBtn_Click;
 
+            EditCategoryBtn.Click += EditCategoryBtn_Click;
+            DeleteCategoryBtn.Click += DeleteCategoryBtn_Click;
+
             FilterAndSortTasks();
         }
 
@@ -418,6 +421,84 @@ namespace WPF_Projekt
         private void StatusFilterComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             FilterAndSortTasks();
+        }
+
+        private void EditCategoryBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (CategoriesList.SelectedItem is not Category selectedCategory)
+            {
+                MessageBox.Show("Wybierz kategorię do edycji.", "Informacja", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            var editWindow = new EditCategoryWindow(selectedCategory.Name)
+            {
+                Owner = this,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner
+            };
+
+            if (editWindow.ShowDialog() == true)
+            {
+                string newName = editWindow.UpdatedCategoryName.Trim();
+
+                if (string.IsNullOrWhiteSpace(newName))
+                {
+                    MessageBox.Show("Nazwa kategorii nie może być pusta.");
+                    return;
+                }
+
+                if (AppData.Categories.Any(c => c.Name == newName && c != selectedCategory))
+                {
+                    MessageBox.Show("Kategoria o takiej nazwie już istnieje.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                // Aktualizuj nazwę kategorii
+                string oldName = selectedCategory.Name;
+                selectedCategory.Name = newName;
+
+                // Zaktualizuj wszystkie przypisane zadania
+                foreach (var task in Tasks)
+                {
+                    if (task.Category?.Name == oldName)
+                    {
+                        task.Category.Name = newName;
+                    }
+                }
+
+                CategoriesList.Items.Refresh();
+                TasksList.Items.Refresh();
+
+                // Zapisz zmiany
+                Storage.SaveCategories(AppData.Categories);
+                Storage.SaveTasks(Tasks);
+            }
+
+        }
+
+        private void DeleteCategoryBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (CategoriesList.SelectedItem is not Category selectedCategory)
+            {
+                MessageBox.Show("Wybierz kategorię do usunięcia.", "Uwaga", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            // Sprawdź, czy kategoria jest przypisana do jakiegoś zadania
+            bool isUsed = AllTasks.Any(t => t.Category.Name == selectedCategory.Name);
+            if (isUsed)
+            {
+                MessageBox.Show("Nie można usunąć kategorii, która jest przypisana do istniejących zadań.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            var result = MessageBox.Show($"Czy na pewno chcesz usunąć kategorię \"{selectedCategory.Name}\"?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                AppData.Categories.Remove(selectedCategory);
+                Storage.SaveCategories(AppData.Categories);
+            }
         }
 
 
