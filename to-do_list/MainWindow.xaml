@@ -28,6 +28,7 @@
                 <Button x:Name="AddCategoryBtn" Content="+ Nowa kategoria" Margin="0 10 0 0" Padding="5"/>
                 <Button x:Name="EditCategoryBtn" Content="Edytuj kategorię" Margin="0 10 0 0" Padding="5"/>
                 <Button x:Name="DeleteCategoryBtn" Content="Usuń kategorię"  Margin="0 10 0 0" Padding="5"/>
+                <TextBlock x:Name="CompletionStatusText" Margin="10 5 0 0" FontWeight="Bold" />
             </StackPanel>
         </DockPanel>
 

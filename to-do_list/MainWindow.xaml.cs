@@ -43,6 +43,8 @@ namespace WPF_Projekt
             Tasks = Storage.LoadTasks() ?? new ObservableCollection<TaskItem>();
             TasksList.ItemsSource = Tasks;
 
+
+
             AllTasks = Tasks.ToList();
 
             AddTaskBtn.Click += AddTaskBtn_Click;
@@ -64,6 +66,7 @@ namespace WPF_Projekt
             DeleteCategoryBtn.Click += DeleteCategoryBtn_Click;
 
             FilterAndSortTasks();
+            UpdateCompletionStatus();
         }
 
         private void AddSubtaskBtn_Click(object sender, RoutedEventArgs e)
@@ -110,6 +113,9 @@ namespace WPF_Projekt
             {
                 // Odwracamy status "Completed"
                 selectedTask.Completed = !selectedTask.Completed;
+
+                // Odświeżamy statystyki
+                UpdateCompletionStatus();
 
                 // Odśwież listę i szczegóły
                 TasksList.Items.Refresh();
@@ -406,11 +412,24 @@ namespace WPF_Projekt
             }
         }
 
-        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        private void UpdateCompletionStatus()
         {
-            base.OnClosing(e);
-            Storage.SaveTasks(Tasks);
-            Storage.SaveCategories(AppData.Categories);
+            if (TasksList.Items.Count == 0)
+            {
+                CompletionStatusText.Text = "Brak zadań";
+                return;
+            }
+
+            int totalTasks = TasksList.Items.Count;
+            int doneTasks = 0;
+
+            foreach (TaskItem task in TasksList.Items)
+            {
+                if (task.Completed) doneTasks++;
+            }
+
+            double percentDone = (double)doneTasks / totalTasks * 100;
+            CompletionStatusText.Text = $"Wykonane: {doneTasks}/{totalTasks} ({percentDone:F1}%)";
         }
 
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -501,7 +520,12 @@ namespace WPF_Projekt
             }
         }
 
-
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            base.OnClosing(e);
+            Storage.SaveTasks(Tasks);
+            Storage.SaveCategories(AppData.Categories);
+        }
     }
 
 }
