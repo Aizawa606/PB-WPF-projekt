@@ -41,7 +41,7 @@ namespace to_do_list
                     y = 40;
                 }
 
-                string taskLine = $"{(task.Completed ? "[✔]" : "[✖]")} {task.Title} ({task.Priority}) - {task.Category}";
+                string taskLine = $"{(task.Completed ? "[✔]" : "[✖]")} {task.Title} ({task.Priority}) - {task.Category.Name}";
                 if (task.Deadline.HasValue)
                     taskLine += $" | Termin: {task.Deadline.Value:dd.MM.yyyy}";
 
