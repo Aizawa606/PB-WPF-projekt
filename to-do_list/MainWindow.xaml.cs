@@ -350,21 +350,21 @@ namespace WPF_Projekt
         {
             if (Tasks == null || AllTasks == null) return;
 
-            var selectedItem = (SortComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
+            var selectedItem = (SortComboBox.SelectedItem as ComboBoxItem)?.Tag?.ToString();
             if (string.IsNullOrEmpty(selectedItem)) return;
 
             string searchText = SearchTextBox.Text?.Trim().ToLower() ?? "";
-            string selectedStatus = (StatusFilterComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
+            string selectedStatus = (StatusFilterComboBox.SelectedItem as ComboBoxItem)?.Tag?.ToString();
 
             IEnumerable<TaskItem> filtered = AllTasks;
 
             // Filtrowanie po statusie
             switch (selectedStatus)
             {
-                case "Zakończone":
+                case "done":
                     filtered = filtered.Where(t => t.Completed);
                     break;
-                case "Niezakończone":
+                case "notdone":
                     filtered = filtered.Where(t => !t.Completed);
                     break;
                     // "Wszystkie" — bez filtrowania
@@ -379,26 +379,26 @@ namespace WPF_Projekt
             // Sortowanie
             switch (selectedItem)
             {
-                case "Sortuj po dacie":
+                case "data":
                     filtered = IsSortDescending
                         ? filtered.OrderByDescending(t => t.Deadline ?? DateTime.MinValue)
                         : filtered.OrderBy(t => t.Deadline ?? DateTime.MaxValue);
                     break;
 
-                case "Sortuj po priorytecie":
+                case "priorytet":
                     filtered = IsSortDescending
                         ? filtered.OrderByDescending(t => GetPriorityValue(t.Priority))
                         : filtered.OrderBy(t => GetPriorityValue(t.Priority));
                     break;
 
-                case "Sortuj po kategorii":
+                case "kategoria":
                     filtered = IsSortDescending
                         ? filtered.OrderByDescending(t => t.Category?.Name ?? "")
                         : filtered.OrderBy(t => t.Category?.Name ?? "");
                     break;
 
 
-                case "Sortuj po nazwie":
+                case "nazwa":
                     filtered = IsSortDescending
                         ? filtered.OrderByDescending(t => t.Title)
                         : filtered.OrderBy(t => t.Title);

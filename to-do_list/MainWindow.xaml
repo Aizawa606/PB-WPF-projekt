@@ -17,7 +17,7 @@
         <!-- Lewy panel - nawigacja i kategorie -->
         <DockPanel Grid.Column="0" Background="#f0f0f0">
             <StackPanel DockPanel.Dock="Top" Margin="10">
-                <TextBlock Text="{DynamicResource TextCategory}" FontWeight="Bold" FontSize="16" Margin="0 0 0 10"/>
+                <TextBlock Text="{DynamicResource txt__kategoria}" FontWeight="Bold" FontSize="16" Margin="0 0 0 10"/>
                 <ListView x:Name="CategoriesList" Height="300">
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -25,9 +25,9 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <Button x:Name="AddCategoryBtn" Content="+ Nowa kategoria" Margin="0 10 0 0" Padding="5"/>
-                <Button x:Name="EditCategoryBtn" Content="Edytuj kategorię" Margin="0 10 0 0" Padding="5"/>
-                <Button x:Name="DeleteCategoryBtn" Content="Usuń kategorię"  Margin="0 10 0 0" Padding="5"/>
+                <Button x:Name="AddCategoryBtn" Content="{DynamicResource txt__nowa_kategoria}" Margin="0 10 0 0" Padding="5"/>
+                <Button x:Name="EditCategoryBtn" Content="{DynamicResource txt_edytuj_kategorię}" Margin="0 10 0 0" Padding="5"/>
+                <Button x:Name="DeleteCategoryBtn" Content="{DynamicResource txt_usuń_kategorię}"  Margin="0 10 0 0" Padding="5"/>
                 <TextBlock x:Name="CompletionStatusText" Margin="10 5 0 0" FontWeight="Bold" />
             </StackPanel>
         </DockPanel>
@@ -56,37 +56,37 @@
                     <!-- StatusFilterComboBox -->
                 </Grid.ColumnDefinitions>
 
-                <Button x:Name="AddTaskBtn" Content="+ Dodaj zadanie" Padding="5" VerticalAlignment="Center" Grid.Column="0"/>
+                <Button x:Name="AddTaskBtn" Content="{DynamicResource txt__dodaj_zadanie}" Padding="5" VerticalAlignment="Center" Grid.Column="0"/>
 
                 <TextBox x:Name="SearchTextBox" Margin="0" VerticalAlignment="Center" Grid.Column="2" TextChanged="SearchTextBox_TextChanged"/>
 
                 <ComboBox x:Name="SortComboBox" VerticalAlignment="Center" Grid.Column="4" SelectedIndex="0" SelectionChanged="SortComboBox_SelectionChanged">
-                    <ComboBoxItem Content="Sortuj po dacie"/>
-                    <ComboBoxItem Content="Sortuj po priorytecie"/>
-                    <ComboBoxItem Content="Sortuj po kategorii"/>
-                    <ComboBoxItem Content="Sortuj po nazwie"/>
+                    <ComboBoxItem Content="{DynamicResource txt_sortuj_po_dacie}" Tag="data"/>
+                    <ComboBoxItem Content="{DynamicResource txt_sortuj_po_priorytecie}" Tag="priorytet"/>
+                    <ComboBoxItem Content="{DynamicResource txt_sortuj_po_kategorii}" Tag="kategoria"/>
+                    <ComboBoxItem Content="{DynamicResource txt_sortuj_po_nazwie}" Tag="nazwa"/>
                 </ComboBox>
 
-                <Button x:Name="SortDirectionBtn" Content="▲" Width="30" Height="25" VerticalAlignment="Center" ToolTip="Zmień kierunek sortowania" Grid.Column="6"/>
+                <Button x:Name="SortDirectionBtn" Content="▲" Width="30" Height="25" VerticalAlignment="Center" ToolTip="{DynamicResource txt_zmień_kierunek_sortowania}" Grid.Column="6"/>
 
                 <ComboBox x:Name="StatusFilterComboBox" Margin="0" VerticalAlignment="Center" Grid.Column="8" SelectionChanged="StatusFilterComboBox_SelectionChanged">
-                    <ComboBoxItem Content="Wszystkie" IsSelected="True"/>
-                    <ComboBoxItem Content="Zakończone"/>
-                    <ComboBoxItem Content="Niezakończone"/>
+                    <ComboBoxItem Content="{DynamicResource txt_wszystkie}" Tag="all" IsSelected="True"/>
+                    <ComboBoxItem Content="{DynamicResource txt_zakończone}" Tag="done"/>
+                    <ComboBoxItem Content="{DynamicResource txt_niezakończone}" Tag="notdone"/>
                 </ComboBox>
             </Grid>
 
             <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 10 0 0" >
 
                 <ComboBox SelectionChanged="LanguageComboBox_SelectionChanged" SelectedIndex="0" Margin="0 0 10 0" Padding="5" Height="30" >
-                    <ComboBoxItem Content="Polski" Tag="pl"/>
-                    <ComboBoxItem Content="English" Tag="en"/>
+                    <ComboBoxItem Content="{DynamicResource txt_polski}" Tag="pl"/>
+                    <ComboBoxItem Content="{DynamicResource txt_english}" Tag="en"/>
                 </ComboBox>
-                
-                <Button x:Name="EditTaskBtn" Content="Edytuj" Margin="0 0 10 0" Padding="5" Width="100" Height="30"/>
-                <Button x:Name="DeleteTaskBtn" Content="Usuń" Margin="0 0 10 0" Padding="5" Width="100" Height="30"/>
-                <Button x:Name="MarkAsDoneBtn" Content="✔ Wykonane" Padding="5" Width="100" Height="30"/>
-                <Button x:Name="ExportPdfBtn" Content="Eksportuj do PDF" Click="BtnExportPdf_Click" Margin="5" Padding="5" Height="30"/>
+
+                <Button x:Name="EditTaskBtn" Content="{DynamicResource txt_edytuj}" Margin="0 0 10 0" Padding="5" Width="100" Height="30"/>
+                <Button x:Name="DeleteTaskBtn" Content="{DynamicResource txt_usuń}" Margin="0 0 10 0" Padding="5" Width="100" Height="30"/>
+                <Button x:Name="MarkAsDoneBtn" Content="{DynamicResource txt__wykonane}" Padding="5" Width="100" Height="30"/>
+                <Button x:Name="ExportPdfBtn" Content="{DynamicResource txt_eksportuj_do_pdf}" Click="BtnExportPdf_Click" Margin="5" Padding="5" Height="30"/>
             </StackPanel>
 
 
@@ -94,9 +94,9 @@
             <ListView x:Name="TasksList">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Status" Width="50" DisplayMemberBinding="{Binding StatusSymbol}"/>
-                        <GridViewColumn Header="Nazwa" Width="200" DisplayMemberBinding="{Binding Title}"/>
-                        <GridViewColumn Header="Kategoria" Width="120">
+                        <GridViewColumn Header="{DynamicResource txt_status}" Width="50" DisplayMemberBinding="{Binding StatusSymbol}"/>
+                        <GridViewColumn Header="{DynamicResource txt_nazwa}" Width="200" DisplayMemberBinding="{Binding Title}"/>
+                        <GridViewColumn Header="{DynamicResource txt_kategoria}" Width="120">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Category.Name}" />
@@ -104,8 +104,8 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Priorytet" Width="80" DisplayMemberBinding="{Binding Priority}"/>
-                        <GridViewColumn Header="Termin" Width="100" DisplayMemberBinding="{Binding Deadline}"/>
+                        <GridViewColumn Header="{DynamicResource txt_priorytet}" Width="80" DisplayMemberBinding="{Binding Priority}"/>
+                        <GridViewColumn Header="{DynamicResource txt_termin}" Width="100" DisplayMemberBinding="{Binding Deadline}"/>
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -120,11 +120,11 @@
                     <TextBlock x:Name="TaskPriority" Margin="0 0 0 5"/>
                     <TextBlock x:Name="TaskDeadline" Margin="0 0 0 15"/>
 
-                    <TextBlock Text="Opis:" FontWeight="Bold" Margin="0 10 0 5"/>
+                    <TextBlock Text="{DynamicResource txt_opis}" FontWeight="Bold" Margin="0 10 0 5"/>
                     <TextBlock x:Name="TaskDescription" TextWrapping="Wrap" Margin="0 0 0 15"/>
 
                     <StackPanel Orientation="Horizontal" Margin="0 10 0 5" VerticalAlignment="Center">
-                        <TextBlock Text="Podzadania:" FontWeight="Bold" VerticalAlignment="Center"/>
+                        <TextBlock Text="{DynamicResource txt_podzadania}" FontWeight="Bold" VerticalAlignment="Center"/>
                         <Grid Margin="10 0 0 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>

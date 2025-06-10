@@ -1,6 +1,38 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    
     <sys:String x:Key="TitleWindow">Task Manager</sys:String>
-    <sys:String x:Key="TextCategory">Categories</sys:String>
+
+    <sys:String x:Key="txt__kategoria">Categories</sys:String>
+    <sys:String x:Key="txt__nowa_kategoria">+ New Category</sys:String>
+    <sys:String x:Key="txt_edytuj_kategorię">Edit Category</sys:String>
+    <sys:String x:Key="txt_usuń_kategorię">Delete Category</sys:String>
+
+    <sys:String x:Key="txt__dodaj_zadanie">+ Add Task</sys:String>
+    <sys:String x:Key="txt_sortuj_po_dacie">Sort by date</sys:String>
+    <sys:String x:Key="txt_sortuj_po_priorytecie">Sort by priority</sys:String>
+    <sys:String x:Key="txt_sortuj_po_kategorii">Sort by category</sys:String>
+    <sys:String x:Key="txt_sortuj_po_nazwie">Sort by name</sys:String>
+    <sys:String x:Key="txt_zmień_kierunek_sortowania">Toggle sort direction</sys:String>
+    <sys:String x:Key="txt_wszystkie">All</sys:String>
+    <sys:String x:Key="txt_zakończone">Completed</sys:String>
+    <sys:String x:Key="txt_niezakończone">Incomplete</sys:String>
+
+    <sys:String x:Key="txt_status">Status</sys:String>
+    <sys:String x:Key="txt_nazwa">Name</sys:String>
+    <sys:String x:Key="txt_kategoria">Category</sys:String>
+    <sys:String x:Key="txt_priorytet">Priority</sys:String>
+    <sys:String x:Key="txt_termin">Deadline</sys:String>
+
+    <sys:String x:Key="txt_polski">Polish</sys:String>
+    <sys:String x:Key="txt_english">English</sys:String>
+    <sys:String x:Key="txt_edytuj">Edit</sys:String>
+    <sys:String x:Key="txt_usuń">Delete</sys:String>
+    <sys:String x:Key="txt__wykonane">✔ Done</sys:String>
+    <sys:String x:Key="txt_eksportuj_do_pdf">Export to PDF</sys:String>
+
+    <sys:String x:Key="txt_opis">Description:</sys:String>
+    <sys:String x:Key="txt_podzadania">Subtasks:</sys:String>
+    
 </ResourceDictionary>

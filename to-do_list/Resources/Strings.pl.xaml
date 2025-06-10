@@ -1,6 +1,38 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    
     <sys:String x:Key="TitleWindow">Menedżer zadań</sys:String>
-    <sys:String x:Key="TextCategory">Kategorie</sys:String>
+
+    <sys:String x:Key="txt__kategoria">Kategorie</sys:String>
+    <sys:String x:Key="txt__nowa_kategoria">+ Nowa kategoria</sys:String>
+    <sys:String x:Key="txt_edytuj_kategorię">Edytuj kategorię</sys:String>
+    <sys:String x:Key="txt_usuń_kategorię">Usuń kategorię</sys:String>
+    
+    <sys:String x:Key="txt__dodaj_zadanie">+ Dodaj zadanie</sys:String>
+    <sys:String x:Key="txt_sortuj_po_dacie">Sortuj po dacie</sys:String>
+    <sys:String x:Key="txt_sortuj_po_priorytecie">Sortuj po priorytecie</sys:String>
+    <sys:String x:Key="txt_sortuj_po_kategorii">Sortuj po kategorii</sys:String>
+    <sys:String x:Key="txt_sortuj_po_nazwie">Sortuj po nazwie</sys:String>
+    <sys:String x:Key="txt_zmień_kierunek_sortowania">Zmień kierunek sortowania</sys:String>
+    <sys:String x:Key="txt_wszystkie">Wszystkie</sys:String>
+    <sys:String x:Key="txt_zakończone">Zakończone</sys:String>
+    <sys:String x:Key="txt_niezakończone">Niezakończone</sys:String>
+    
+    <sys:String x:Key="txt_status">Status</sys:String>
+    <sys:String x:Key="txt_nazwa">Nazwa</sys:String>
+    <sys:String x:Key="txt_kategoria">Kategoria</sys:String>
+    <sys:String x:Key="txt_priorytet">Priorytet</sys:String>
+    <sys:String x:Key="txt_termin">Termin</sys:String>
+
+    <sys:String x:Key="txt_polski">Polski</sys:String>
+    <sys:String x:Key="txt_english">Angielski</sys:String>
+    <sys:String x:Key="txt_edytuj">Edytuj</sys:String>
+    <sys:String x:Key="txt_usuń">Usuń</sys:String>
+    <sys:String x:Key="txt__wykonane">✔ Wykonane</sys:String>
+    <sys:String x:Key="txt_eksportuj_do_pdf">Eksportuj do PDF</sys:String>
+    
+    <sys:String x:Key="txt_opis">Opis:</sys:String>
+    <sys:String x:Key="txt_podzadania">Podzadania:</sys:String>
+    
 </ResourceDictionary>
