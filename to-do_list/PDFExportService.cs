@@ -10,7 +10,11 @@ namespace to_do_list
     {
         public static void ExportTasksToPdf(List<TaskItem> tasks, string filename = "ListaZadan.pdf")
         {
-            GlobalFontSettings.FontResolver = new CustomFontResolver();
+            if (GlobalFontSettings.FontResolver == null)
+            {
+                GlobalFontSettings.FontResolver = new CustomFontResolver();
+            }
+
 
             PdfDocument document = new PdfDocument();
             document.Info.Title = "Lista Zadań";
