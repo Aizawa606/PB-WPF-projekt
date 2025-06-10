@@ -171,6 +171,7 @@ namespace WPF_Projekt
                 AllTasks.Add(window.CreatedTask);
                 Tasks.Add(window.CreatedTask);
                 FilterAndSortTasks(); // sortowanie po dodaniu
+                UpdateCompletionStatus();
             }
 
         }
@@ -223,6 +224,7 @@ namespace WPF_Projekt
                     Storage.SaveTasks(Tasks);
 
                     TasksList_SelectionChanged(null, null);
+                    UpdateCompletionStatus();
 
                 }
             }
@@ -242,8 +244,10 @@ namespace WPF_Projekt
                 if (result == MessageBoxResult.Yes)
                 {
                     Tasks.Remove(selectedTask);
+                    AllTasks.Remove(selectedTask);
                     // zapis do pliku
                     Storage.SaveTasks(Tasks);
+                    UpdateCompletionStatus();
 
                 }
             }
@@ -488,7 +492,7 @@ namespace WPF_Projekt
                 Storage.SaveCategories(AppData.Categories);
                 Storage.SaveTasks(Tasks);
             }
-
+            
         }
 
         private void DeleteCategoryBtn_Click(object sender, RoutedEventArgs e)
