@@ -520,6 +520,15 @@ namespace WPF_Projekt
             }
         }
 
+        private void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var combo = sender as ComboBox;
+            var selectedItem = combo.SelectedItem as ComboBoxItem;
+            var lang = selectedItem.Tag.ToString();
+
+            App.SetLanguage(lang);
+        }
+
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
             base.OnClosing(e);
