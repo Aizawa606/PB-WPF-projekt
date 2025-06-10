@@ -42,6 +42,13 @@ namespace WPF_Projekt
                 CategoryComboBox.SelectedIndex = 0;
         }
 
+        public void SetSubtasks(List<SubTask> subtasks)
+        {
+            // Zamiana listy obiektów SubTask na listę stringów z tytułami
+            SubtasksListBox.ItemsSource = subtasks.Select(s => s.Title).ToList();
+        }
+
+
         private void DeleteSubtaskBtn_Click(object sender, RoutedEventArgs e)
         {
             if (SubtasksListBox.SelectedItem == null)

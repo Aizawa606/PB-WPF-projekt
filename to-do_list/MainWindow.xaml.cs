@@ -71,39 +71,41 @@ namespace WPF_Projekt
 
         private void AddSubtaskBtn_Click(object sender, RoutedEventArgs e)
         {
-            // Sprawdź, czy zostało wybrane jakieś zadanie z listy
             if (TasksList.SelectedItem is TaskItem selectedTask)
             {
-                // Utwórz i ustaw właściciela nowego okna dodawania podzadania
-                var addSubtaskWindow = new AddSubtaskWindow();
-                addSubtaskWindow.Owner = this;
+                // Zbierz już istniejące tytuły podzadań
+                var existingNames = selectedTask.Subtasks
+                    .Select(st => st.Title)
+                    .ToList();
 
-                // Pokaż okno dialogowe i poczekaj na wynik (OK lub Anuluj)
-                if (addSubtaskWindow.ShowDialog() == true)
+                // Użyj tego samego okna co w TaskEditWindow
+                var inputWindow = new SubtaskInputWindow
                 {
-                    // Pobierz tekst podzadania wpisany przez użytkownika
-                    string newTitle = addSubtaskWindow.ResponseText;
+                    Owner = this,
+                    ExistingSubtaskNames = existingNames
+                };
 
-                    // Jeśli tekst nie jest pusty lub samymi spacjami
+                if (inputWindow.ShowDialog() == true)
+                {
+                    string newTitle = inputWindow.SubtaskName;
+
                     if (!string.IsNullOrWhiteSpace(newTitle))
                     {
-                        // Dodaj nowe podzadanie do listy podzadań wybranego zadania
+                        // Dodaj podzadanie do modelu
                         selectedTask.Subtasks.Add(new SubTask { Title = newTitle, Completed = false });
 
-                        // Odśwież listę podzadań w UI, aby nowy element się pojawił
+                        // Odśwież widoki
                         SubtasksList.Items.Refresh();
-
-                        // Odśwież listę zadań (jeśli w UI jest zależność od podzadań)
                         TasksList.Items.Refresh();
                     }
                 }
             }
             else
             {
-                // Jeśli nie wybrano zadania, pokaż komunikat informujący o tym
                 MessageBox.Show("Wybierz zadanie, do którego chcesz dodać podzadanie.", "Informacja", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
+
 
 
 
@@ -200,15 +202,9 @@ namespace WPF_Projekt
                 window.SubtasksListBox.Items.Clear();
                 foreach (var sub in selectedTask.Subtasks)
                 {
-                    var tb = new TextBox
-                    {
-                        Text = sub.Title,
-                        Margin = new Thickness(0, 5, 0, 0),
-                        MinWidth = 200
-                    };
-                    var item = new ListBoxItem { Content = tb };
-                    window.SubtasksListBox.Items.Add(item);
+                    window.SubtasksListBox.Items.Add(sub.Title);
                 }
+
 
 
                 if (window.ShowDialog() == true && window.CreatedTask != null)
