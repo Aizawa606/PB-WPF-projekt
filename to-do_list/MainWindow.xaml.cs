@@ -102,7 +102,7 @@ namespace WPF_Projekt
             }
             else
             {
-                MessageBox.Show("Wybierz zadanie, do którego chcesz dodać podzadanie.", "Informacja", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(Lang.L("msg_wybierz_zadanie_dla_podzadania"), Lang.L("msg_information"), MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -130,7 +130,7 @@ namespace WPF_Projekt
             }
             else
             {
-                MessageBox.Show("Wybierz zadanie, aby zmienić jego status.", "Informacja", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(Lang.L("msg_wybierz_zadanie_dla_statusu"), Lang.L("msg_information"), MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -138,16 +138,15 @@ namespace WPF_Projekt
         {
             if (TasksList.SelectedItem is TaskItem selectedTask)
             {
-                TaskTitle.Text = selectedTask.Title;
-                TaskCategory.Text = $"Kategoria: {selectedTask.Category?.Name}";
-                TaskPriority.Text = $"Priorytet: {selectedTask.Priority}";
+                TaskCategory.Text = $"{Lang.L("lbl_category")}: {selectedTask.Category?.Name}";
+                TaskPriority.Text = $"{Lang.L("lbl_priority")}: {selectedTask.Priority}";
 
                 TaskDeadline.Text = selectedTask.Deadline.HasValue
-                    ? $"Termin: {selectedTask.Deadline.Value.ToShortDateString()}"
-                    : "Termin: brak";
+                    ? $"{Lang.L("lbl_deadline")}: {selectedTask.Deadline.Value.ToShortDateString()}"
+                    : Lang.L("lbl_deadline_none");
 
                 TaskDescription.Text = string.IsNullOrWhiteSpace(selectedTask.Description)
-                    ? "Brak opisu"
+                    ? Lang.L("lbl_no_description")
                     : selectedTask.Description;
 
                 SubtasksList.ItemsSource = selectedTask.Subtasks;
@@ -230,7 +229,7 @@ namespace WPF_Projekt
             }
             else
             {
-                MessageBox.Show("Wybierz zadanie do edycji.", "Informacja", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(Lang.L("msg_wybierz_zadanie_do_edycji"), Lang.L("msg_information"), MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -238,8 +237,8 @@ namespace WPF_Projekt
         {
             if (TasksList.SelectedItem is TaskItem selectedTask)
             {
-                var result = MessageBox.Show($"Czy na pewno chcesz usunąć zadanie \"{selectedTask.Title}\"?",
-                    "Potwierdzenie usunięcia", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                var result = MessageBox.Show(string.Format(Lang.L("msg_confirm_delete_task"), selectedTask.Title),
+                    Lang.L("msg_deletion_confirmation"), MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
                 if (result == MessageBoxResult.Yes)
                 {
@@ -253,7 +252,7 @@ namespace WPF_Projekt
             }
             else
             {
-                MessageBox.Show("Wybierz zadanie do usunięcia.", "Informacja", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(Lang.L("msg_wybierz_zadanie_do_usuniecia"), Lang.L("msg_information"), MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -277,7 +276,7 @@ namespace WPF_Projekt
                 }
                 else
                 {
-                    MessageBox.Show("Kategoria o takiej nazwie już istnieje.", "Informacja", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show(Lang.L("msg_kategoria_istnieje"), Lang.L("msg_information"), MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
         }
@@ -288,15 +287,15 @@ namespace WPF_Projekt
 
             if (selectedSubtask == null)
             {
-                MessageBox.Show("Proszę zaznaczyć podzadanie do usunięcia.", "Brak zaznaczenia", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(Lang.L("msg_select_subtask_to_delete"), Lang.L("msg_nothing_selected"), MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
           
             if (TasksList.SelectedItem is TaskItem selectedTask)
             {
-                var result = MessageBox.Show($"Czy na pewno chcesz usunąć podzadanie \"{selectedSubtask.Title}\"?",
-                                             "Potwierdzenie usunięcia", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                var result = MessageBox.Show(string.Format(Lang.L("msg_confirm_delete_subtask"), selectedSubtask.Title),
+                                             Lang.L("msg_deletion_confirmation"), MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
                     selectedTask.Subtasks.Remove(selectedSubtask);
@@ -307,7 +306,7 @@ namespace WPF_Projekt
             }
             else
             {
-                MessageBox.Show("Proszę najpierw wybrać zadanie.", "Brak zaznaczonego zadania", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(Lang.L("msg_proszę_wybrać_zadanie"), Lang.L("msg_no_task_selected"), MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -416,7 +415,7 @@ namespace WPF_Projekt
         {
             if (TasksList.Items.Count == 0)
             {
-                CompletionStatusText.Text = "Brak zadań";
+                CompletionStatusText.Text = Lang.L("lbl_no_tasks");
                 return;
             }
 
@@ -429,7 +428,7 @@ namespace WPF_Projekt
             }
 
             double percentDone = (double)doneTasks / totalTasks * 100;
-            CompletionStatusText.Text = $"Wykonane: {doneTasks}/{totalTasks} ({percentDone:F1}%)";
+            CompletionStatusText.Text = string.Format(Lang.L("lbl_completed_status"),doneTasks, totalTasks, percentDone);
         }
 
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -446,7 +445,7 @@ namespace WPF_Projekt
         {
             if (CategoriesList.SelectedItem is not Category selectedCategory)
             {
-                MessageBox.Show("Wybierz kategorię do edycji.", "Informacja", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(Lang.L("msg_wybierz_kategorie_do_edycji"), Lang.L("msg_information"), MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
@@ -462,13 +461,13 @@ namespace WPF_Projekt
 
                 if (string.IsNullOrWhiteSpace(newName))
                 {
-                    MessageBox.Show("Nazwa kategorii nie może być pusta.");
+                    MessageBox.Show(Lang.L("msg_nazwa_kategorii_pusta"));
                     return;
                 }
 
                 if (AppData.Categories.Any(c => c.Name == newName && c != selectedCategory))
                 {
-                    MessageBox.Show("Kategoria o takiej nazwie już istnieje.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show(Lang.L("msg_kategoria_istnieje"), Lang.L("msg_error"), MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
@@ -499,7 +498,7 @@ namespace WPF_Projekt
         {
             if (CategoriesList.SelectedItem is not Category selectedCategory)
             {
-                MessageBox.Show("Wybierz kategorię do usunięcia.", "Uwaga", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(Lang.L("msg_wybierz_kategorie_do_usuniecia"), Lang.L("msg_warning"), MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
@@ -507,11 +506,11 @@ namespace WPF_Projekt
             bool isUsed = AllTasks.Any(t => t.Category.Name == selectedCategory.Name);
             if (isUsed)
             {
-                MessageBox.Show("Nie można usunąć kategorii, która jest przypisana do istniejących zadań.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(Lang.L("msg_nie_mozna_usunac_kategorii"), Lang.L("msg_error"), MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            var result = MessageBox.Show($"Czy na pewno chcesz usunąć kategorię \"{selectedCategory.Name}\"?", "Potwierdzenie", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var result = MessageBox.Show(string.Format(Lang.L("msg_confirm_delete_category"), selectedCategory.Name), Lang.L("msg_confirmation"), MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (result == MessageBoxResult.Yes)
             {

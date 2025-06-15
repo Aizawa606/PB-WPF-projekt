@@ -53,7 +53,7 @@ namespace WPF_Projekt
         {
             if (SubtasksListBox.SelectedItem == null)
             {
-                MessageBox.Show("Proszę zaznaczyć podzadanie do usunięcia.", "Brak zaznaczenia", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(Lang.L("msg_select_subtask_to_delete"), Lang.L("msg_nothing_selected"), MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
             SubtasksListBox.Items.Remove(SubtasksListBox.SelectedItem);
@@ -93,7 +93,7 @@ namespace WPF_Projekt
 
             // Priorytet
             var selectedPriorityItem = PriorityComboBox.SelectedItem as ComboBoxItem;
-            string priority = selectedPriorityItem?.Content.ToString() ?? "Niski";
+            string priority = selectedPriorityItem?.Tag.ToString() ?? "Low"; // wewnętrzna wartość, nie tłumaczenie
 
             // Kategoria
             Category category;
@@ -104,7 +104,7 @@ namespace WPF_Projekt
             }
             else
             {
-                category = new Category { Name = "Ogólna" };
+                category = new Category { Name = Lang.L("default_category_name") };
             }
 
 

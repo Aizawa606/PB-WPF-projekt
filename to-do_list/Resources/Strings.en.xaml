@@ -34,5 +34,105 @@
 
     <sys:String x:Key="txt_opis">Description:</sys:String>
     <sys:String x:Key="txt_podzadania">Subtasks:</sys:String>
+
+
+
+    <sys:String x:Key="AddCategoryWindow">Add Category</sys:String>
+
+    <sys:String x:Key="txt__nazwa_kategorii">Category name:</sys:String>
+
+    <sys:String x:Key="msg_enter_category">Enter a category name.</sys:String>
+
+
+
+    <sys:String x:Key="EditCategoryWindow">Edit Category</sys:String>
+
+    <sys:String x:Key="txt__nowa_nazwa_kategorii">New category name:</sys:String>
+    <sys:String x:Key="txt_zapisz">Save</sys:String>
+    <sys:String x:Key="txt_anuluj">Cancel</sys:String>
+
+
+
+    <sys:String x:Key="AddSubtaskWindow">Add subtask</sys:String>
+
+    <sys:String x:Key="txt_tytuł_podzadania">Enter subtask title:</sys:String>
     
+    <sys:String x:Key="msg_empty_subtask">Subtask title cannot be empty.</sys:String>
+    <sys:String x:Key="msg_error">Error</sys:String>
+
+    
+    
+    <sys:String x:Key="SubtaskInputWindow">New subtask</sys:String>
+    
+    <sys:String x:Key="txt_nazwa_podzadania">Subtask name:</sys:String>
+
+    <sys:String x:Key="msg_subtask_exists">A subtask with this name already exists.</sys:String>
+
+
+    
+    <sys:String x:Key="TaskEditWindow">Add/Edit Task</sys:String>
+
+    <sys:String x:Key="txt_nazwa_zadania">Task name:</sys:String>
+    <sys:String x:Key="txt_opis_zadania">Description (optional):</sys:String>
+    <sys:String x:Key="txt_kategoria_">Category:</sys:String>
+    <sys:String x:Key="txt_nowa_kategoria">New category...</sys:String>
+    <sys:String x:Key="txt_priorytet_">Priority:</sys:String>
+    <sys:String x:Key="txt_niski">Low</sys:String>
+    <sys:String x:Key="txt_sredni">Medium</sys:String>
+    <sys:String x:Key="txt_wysoki">High</sys:String>
+    <sys:String x:Key="txt_termin_">Deadline:</sys:String>
+    <sys:String x:Key="txt__dodaj_podzadanie">+ Add subtask</sys:String>
+    <sys:String x:Key="txt__usun_podzadanie">- Delete subtask</sys:String>
+
+    <sys:String x:Key="msg_select_subtask_to_delete">Please select a subtask to delete.</sys:String>
+    <sys:String x:Key="msg_nothing_selected">Nothing selected</sys:String>
+
+    <sys:String x:Key="default_category_name">General</sys:String>
+
+
+
+    <sys:String x:Key="log_save_tasks_error">Error saving tasks:</sys:String>
+    <sys:String x:Key="log_save_categories_error">Error saving categories:</sys:String>
+
+    
+    
+    <sys:String x:Key="msg_information">Information</sys:String>
+    <sys:String x:Key="msg_confirmation">Confirmation</sys:String>
+    <sys:String x:Key="msg_deletion_confirmation">Delete Confirmation</sys:String>
+    <sys:String x:Key="msg_warning">Warning</sys:String>
+    <sys:String x:Key="msg_wybierz_zadanie_dla_podzadania">Select a task to add a subtask.</sys:String>
+    <sys:String x:Key="msg_wybierz_zadanie_dla_statusu">Select a task to change its status.</sys:String>
+    <sys:String x:Key="msg_wybierz_zadanie_do_edycji">Select a task to edit.</sys:String>
+    <sys:String x:Key="msg_wybierz_zadanie_do_usuniecia">Select a task to delete.</sys:String>
+    <sys:String x:Key="msg_kategoria_istnieje">Category with this name already exists.</sys:String>
+    <sys:String x:Key="msg_proszę_wybrać_zadanie">Please select a task first.</sys:String>
+    <sys:String x:Key="msg_wybierz_kategorie_do_edycji">Select a category to edit.</sys:String>
+    <sys:String x:Key="msg_nazwa_kategorii_pusta">Category name cannot be empty.</sys:String>
+    <sys:String x:Key="msg_wybierz_kategorie_do_usuniecia">Select a category to delete.</sys:String>
+    <sys:String x:Key="msg_nie_mozna_usunac_kategorii">Cannot delete a category that is assigned to existing tasks.</sys:String>
+    <sys:String x:Key="msg_no_task_selected">No task selected</sys:String>
+
+
+    <sys:String x:Key="msg_confirm_delete_task">Are you sure you want to delete the task "{0}"?</sys:String>
+    <sys:String x:Key="msg_czy_na_pewno_usunac_podzadanie">Are you sure you want to delete the subtask "{0}"?</sys:String>
+    <sys:String x:Key="msg_confirm_delete_category">Are you sure you want to delete the category "{0}"?</sys:String>
+
+
+    <sys:String x:Key="lbl_category">Category</sys:String>
+    <sys:String x:Key="lbl_priority">Priority</sys:String>
+    <sys:String x:Key="lbl_deadline">Deadline</sys:String>
+    <sys:String x:Key="lbl_deadline_none">Deadline: none</sys:String>
+    <sys:String x:Key="lbl_no_description">No description</sys:String>
+
+
+    <sys:String x:Key="lbl_no_tasks">No tasks</sys:String>
+    <sys:String x:Key="lbl_completed_status">Completed: {0}/{1} ({2:F1}%)</sys:String>
+
+
+    <sys:String x:Key="font_missing">Font missing:</sys:String>
+
+    <sys:String x:Key="pdf_title">Task List</sys:String>
+    <sys:String x:Key="pdf_description">Description</sys:String>
+    <sys:String x:Key="pdf_deadline">Deadline</sys:String>
+
 </ResourceDictionary>

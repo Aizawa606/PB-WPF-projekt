@@ -37,7 +37,7 @@ namespace WPF_Projekt
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Błąd zapisu zadań: " + ex.Message);
+                Console.WriteLine(Lang.L("log_save_tasks_error") + " " + ex.Message);
             }
         }
 
@@ -66,7 +66,7 @@ namespace WPF_Projekt
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Błąd zapisu kategorii: " + ex.Message);
+                Console.WriteLine(Lang.L("log_save_categories_error") + " " + ex.Message);
             }
         }
     }

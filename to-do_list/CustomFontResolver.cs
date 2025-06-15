@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using to_do_list;
 
 public class CustomFontResolver : IFontResolver
 {
@@ -26,7 +27,7 @@ public class CustomFontResolver : IFontResolver
         }
         else
         {
-            Console.WriteLine($"[FontResolver] Brak czcionki: {path}");
+            Console.WriteLine($"[FontResolver] {Lang.L("font_missing")} {path}");
         }
     }
 

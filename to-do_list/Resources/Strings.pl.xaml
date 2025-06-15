@@ -34,5 +34,105 @@
     
     <sys:String x:Key="txt_opis">Opis:</sys:String>
     <sys:String x:Key="txt_podzadania">Podzadania:</sys:String>
+
+
+
+    <sys:String x:Key="AddCategoryWindow">Dodaj kategorię</sys:String>
+
+    <sys:String x:Key="txt__nazwa_kategorii">Nazwa kategorii:</sys:String>
+
+    <sys:String x:Key="msg_enter_category">Podaj nazwę kategorii.</sys:String>
+
+
+
+    <sys:String x:Key="EditCategoryWindow">Edytuj kategorię</sys:String>
+
+    <sys:String x:Key="txt__nowa_nazwa_kategorii">Nowa nazwa kategorii:</sys:String>
+    <sys:String x:Key="txt_zapisz">Zapisz</sys:String>
+    <sys:String x:Key="txt_anuluj">Anuluj</sys:String>
+
     
+
+    <sys:String x:Key="AddSubtaskWindow">Dodaj podzadanie</sys:String>
+
+    <sys:String x:Key="txt_tytuł_podzadania">Wpisz tytuł podzadania:</sys:String>
+    
+    <sys:String x:Key="msg_empty_subtask">Tytuł podzadania nie może być pusty.</sys:String>
+    <sys:String x:Key="msg_error">Błąd</sys:String>
+
+
+    
+    <sys:String x:Key="SubtaskInputWindow">Nowe podzadanie</sys:String>
+
+    <sys:String x:Key="txt_nazwa_podzadania">Nazwa podzadania:</sys:String>
+
+    <sys:String x:Key="msg_subtask_exists">Podzadanie o takiej nazwie już istnieje.</sys:String>
+
+
+
+    <sys:String x:Key="TaskEditWindow">Dodaj/Edytuj zadanie</sys:String>
+
+    <sys:String x:Key="txt_nazwa_zadania">Nazwa zadania:</sys:String>
+    <sys:String x:Key="txt_opis_zadania">Opis (opcjonalny):</sys:String>
+    <sys:String x:Key="txt_kategoria_">Kategoria:</sys:String>
+    <sys:String x:Key="txt_nowa_kategoria">Nowa kategoria...</sys:String>
+    <sys:String x:Key="txt_priorytet_">Priorytet:</sys:String>
+    <sys:String x:Key="txt_niski">Niski</sys:String>
+    <sys:String x:Key="txt_sredni">Średni</sys:String>
+    <sys:String x:Key="txt_wysoki">Wysoki</sys:String>
+    <sys:String x:Key="txt_termin_">Termin:</sys:String>
+    <sys:String x:Key="txt__dodaj_podzadanie">+ Dodaj podzadanie</sys:String>
+    <sys:String x:Key="txt__usun_podzadanie">− Usuń podzadanie</sys:String>
+
+    <sys:String x:Key="msg_select_subtask_to_delete">Proszę zaznaczyć podzadanie do usunięcia.</sys:String>
+    <sys:String x:Key="msg_nothing_selected">Brak zaznaczenia</sys:String>
+
+    <sys:String x:Key="default_category_name">Ogólna</sys:String>
+
+
+
+    <sys:String x:Key="log_save_tasks_error">Błąd zapisu zadań:</sys:String>
+    <sys:String x:Key="log_save_categories_error">Błąd zapisu kategorii:</sys:String>
+
+
+
+    <sys:String x:Key="msg_information">Informacja</sys:String>
+    <sys:String x:Key="msg_confirmation">Potwierdzenie</sys:String>
+    <sys:String x:Key="msg_deletion_confirmation">Potwierdzenie usunięcia</sys:String>
+    <sys:String x:Key="msg_warning">Uwaga</sys:String>
+    <sys:String x:Key="msg_wybierz_zadanie_dla_podzadania">Wybierz zadanie, do którego chcesz dodać podzadanie.</sys:String>
+    <sys:String x:Key="msg_wybierz_zadanie_dla_statusu">Wybierz zadanie, aby zmienić jego status.</sys:String>
+    <sys:String x:Key="msg_wybierz_zadanie_do_edycji">Wybierz zadanie do edycji.</sys:String>
+    <sys:String x:Key="msg_wybierz_zadanie_do_usuniecia">Wybierz zadanie do usunięcia.</sys:String>
+    <sys:String x:Key="msg_kategoria_istnieje">Kategoria o takiej nazwie już istnieje.</sys:String>
+    <sys:String x:Key="msg_proszę_wybrać_zadanie">Proszę najpierw wybrać zadanie.</sys:String>
+    <sys:String x:Key="msg_wybierz_kategorie_do_edycji">Wybierz kategorię do edycji.</sys:String>
+    <sys:String x:Key="msg_nazwa_kategorii_pusta">Nazwa kategorii nie może być pusta.</sys:String>
+    <sys:String x:Key="msg_wybierz_kategorie_do_usuniecia">Wybierz kategorię do usunięcia.</sys:String>
+    <sys:String x:Key="msg_nie_mozna_usunac_kategorii">Nie można usunąć kategorii, która jest przypisana do istniejących zadań.</sys:String>
+    <sys:String x:Key="msg_no_task_selected">Brak zaznaczonego zadania</sys:String>
+
+
+    <sys:String x:Key="msg_confirm_delete_task">Czy na pewno chcesz usunąć zadanie "{0}"?</sys:String>
+    <sys:String x:Key="msg_czy_na_pewno_usunac_podzadanie">Czy na pewno chcesz usunąć podzadanie "{0}"?</sys:String>
+    <sys:String x:Key="msg_confirm_delete_category">Czy na pewno chcesz usunąć kategorię "{0}"?</sys:String>
+
+
+    <sys:String x:Key="lbl_category">Kategoria</sys:String>
+    <sys:String x:Key="lbl_priority">Priorytet</sys:String>
+    <sys:String x:Key="lbl_deadline">Termin</sys:String>
+    <sys:String x:Key="lbl_deadline_none">Termin: brak</sys:String>
+    <sys:String x:Key="lbl_no_description">Brak opisu</sys:String>
+
+
+    <sys:String x:Key="lbl_no_tasks">Brak zadań</sys:String>
+    <sys:String x:Key="lbl_completed_status">Wykonane: {0}/{1} ({2:F1}%)</sys:String>
+
+
+    <sys:String x:Key="font_missing">Brak czcionki:</sys:String>
+
+    <sys:String x:Key="pdf_title">Lista Zadań</sys:String>
+    <sys:String x:Key="pdf_description">Opis</sys:String>
+    <sys:String x:Key="pdf_deadline">Termin</sys:String>
+
 </ResourceDictionary>

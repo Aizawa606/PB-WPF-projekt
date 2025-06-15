@@ -17,7 +17,7 @@ namespace to_do_list
 
 
             PdfDocument document = new PdfDocument();
-            document.Info.Title = "Lista Zadań";
+            document.Info.Title = Lang.L("pdf_title");
 
             PdfPage page = document.AddPage();
             XGraphics gfx = XGraphics.FromPdfPage(page);
@@ -29,7 +29,7 @@ namespace to_do_list
 
 
             int y = 40;
-            gfx.DrawString("Lista Zadań", headerFont, XBrushes.Black, 40, y);
+            gfx.DrawString(Lang.L("pdf_title"), headerFont, XBrushes.Black, 40, y);
             y += 30;
 
             foreach (var task in tasks)
@@ -43,14 +43,14 @@ namespace to_do_list
 
                 string taskLine = $"{(task.Completed ? "[✔]" : "[✖]")} {task.Title} ({task.Priority}) - {task.Category.Name}";
                 if (task.Deadline.HasValue)
-                    taskLine += $" | Termin: {task.Deadline.Value:dd.MM.yyyy}";
+                    taskLine += $" | {Lang.L("pdf_deadline")}: {task.Deadline.Value:dd.MM.yyyy}";
 
                 gfx.DrawString(taskLine, taskFont, XBrushes.Black, new XRect(40, y, page.Width - 80, page.Height), XStringFormats.TopLeft);
                 y += 20;
 
                 if (!string.IsNullOrWhiteSpace(task.Description))
                 {
-                    gfx.DrawString($"    Opis: {task.Description}", taskFont, XBrushes.Gray, new XRect(40, y, page.Width - 80, page.Height), XStringFormats.TopLeft);
+                    gfx.DrawString($"    {Lang.L("pdf_description")}: {task.Description}", taskFont, XBrushes.Gray, new XRect(40, y, page.Width - 80, page.Height), XStringFormats.TopLeft);
                     y += 20;
                 }
 

@@ -34,7 +34,7 @@ namespace to_do_list
             }
             else
             {
-                MessageBox.Show("Podaj nazwę kategorii.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(Lang.L("msg_enter_category"), Lang.L("msg_error"), MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 

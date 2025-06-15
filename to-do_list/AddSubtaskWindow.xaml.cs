@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using to_do_list;
 
 namespace WPF_Projekt
 {
@@ -32,7 +33,7 @@ namespace WPF_Projekt
             ResponseText = InputTextBox.Text.Trim();
             if (string.IsNullOrEmpty(ResponseText))
             {
-                MessageBox.Show("Tytuł podzadania nie może być pusty.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(Lang.L("msg_empty_subtask"), Lang.L("msg_error"), MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
             DialogResult = true;

@@ -32,13 +32,13 @@ namespace WPF_Projekt
 
             if (string.IsNullOrWhiteSpace(input))
             {
-                MessageBox.Show("Nazwa podzadania nie może być pusta.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(Lang.L("msg_empty_subtask"), Lang.L("msg_error"), MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
             if (ExistingSubtaskNames.Any(name => string.Equals(name, input, StringComparison.OrdinalIgnoreCase)))
             {
-                MessageBox.Show("Podzadanie o takiej nazwie już istnieje.", "Błąd", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(Lang.L("msg_subtask_exists"), Lang.L("msg_error"), MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 

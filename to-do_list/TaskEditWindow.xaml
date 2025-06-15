@@ -5,43 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_Projekt"
         mc:Ignorable="d"
-        Title="Dodaj/Edytuj zadanie" Height="720" Width="400"
+        Title="{DynamicResource TaskEditWindow}" Height="720" Width="400"
         WindowStartupLocation="CenterOwner">
     <StackPanel Margin="15">
-        <Label Content="Nazwa zadania:"/>
+        <Label Content="{DynamicResource txt_nazwa_zadania}"/>
         <TextBox x:Name="TaskNameTextBox" Margin="0 0 0 10"/>
 
-        <Label Content="Opis (opcjonalny):"/>
+        <Label Content="{DynamicResource txt_opis_zadania}"/>
         <TextBox x:Name="DescriptionTextBox" Height="80" AcceptsReturn="True" Margin="0 0 0 10"/>
 
-        <Label Content="Kategoria:"/>
+        <Label Content="{DynamicResource txt_kategoria_}"/>
         <ComboBox x:Name="CategoryComboBox" Margin="0 0 0 10">
-            <ComboBoxItem Content="Nowa kategoria..." IsSelected="True"/>
+            <ComboBoxItem Content="{DynamicResource txt_nowa_kategoria}" IsSelected="True"/>
         </ComboBox>
 
-        <Label Content="Priorytet:"/>
+        <Label Content="{DynamicResource txt_priorytet_}"/>
         <ComboBox x:Name="PriorityComboBox" Margin="0 0 0 10">
-            <ComboBoxItem Content="Niski"/>
-            <ComboBoxItem Content="Średni"/>
-            <ComboBoxItem Content="Wysoki"/>
+            <ComboBoxItem Content="{DynamicResource txt_niski}" Tag="Low"/>
+            <ComboBoxItem Content="{DynamicResource txt_sredni}" Tag="Medium"/>
+            <ComboBoxItem Content="{DynamicResource txt_wysoki}" Tag="High"/>
         </ComboBox>
 
-        <Label Content="Termin:"/>
+        <Label Content="{DynamicResource txt_termin_}"/>
         <DatePicker x:Name="DeadlineDatePicker" Margin="0 0 0 10"/>
 
-        <Label Content="Podzadania:"/>
+        <Label Content="{DynamicResource txt_podzadania}"/>
         <ListBox x:Name="SubtasksListBox" Height="80" SelectionMode="Single" Margin="0 0 0 10">
             <!-- Elementy podzadań będą tu dodawane -->
         </ListBox>
         <StackPanel Orientation="Horizontal" Margin="0 0 0 20" HorizontalAlignment="Center">
-            <Button x:Name="AddSubtaskBtn" Content="+ Dodaj podzadanie" Width="150"/>
-            <Button x:Name="DeleteSubtaskBtn" Content="− Usuń podzadanie" Width="150" Margin="10 0 0 0" />
+            <Button x:Name="AddSubtaskBtn" Content="{DynamicResource txt__dodaj_podzadanie}" Width="150"/>
+            <Button x:Name="DeleteSubtaskBtn" Content="{DynamicResource txt__usun_podzadanie}" Width="150" Margin="10 0 0 0" />
         </StackPanel>
 
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button x:Name="CancelButton" Content="Anuluj" Width="80" Margin="0 0 10 0" IsCancel="True"/>
-            <Button x:Name="SaveButton" Content="Zapisz" Width="80" IsDefault="True"/>
+            <Button x:Name="CancelButton" Content="{DynamicResource txt_anuluj}" Width="80" Margin="0 0 10 0" IsCancel="True"/>
+            <Button x:Name="SaveButton" Content="{DynamicResource txt_zapisz}" Width="80" IsDefault="True"/>
         </StackPanel>
     </StackPanel>
 </Window>

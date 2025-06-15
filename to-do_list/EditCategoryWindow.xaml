@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:to_do_list"
         mc:Ignorable="d"
-        Title="Edytuj kategorię" Height="150" Width="300">
+        Title="{DynamicResource EditCategoryWindow}" Height="150" Width="300">
     <Grid Margin="10">
         <StackPanel>
-            <TextBlock Text="Nowa nazwa kategorii:" Margin="0,0,0,5"/>
+            <TextBlock Text="{DynamicResource txt__nowa_nazwa_kategorii}" Margin="0,0,0,5"/>
             <TextBox x:Name="CategoryNameTextBox" Margin="0,0,0,10"/>
-            <Button Content="Zapisz" Click="Save_Click" Width="80" HorizontalAlignment="Right"/>
+            <Button Content="{DynamicResource txt_zapisz}" Click="Save_Click" Width="80" HorizontalAlignment="Right"/>
         </StackPanel>
     </Grid>
 </Window>
